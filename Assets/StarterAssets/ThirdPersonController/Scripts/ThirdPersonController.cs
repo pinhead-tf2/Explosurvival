@@ -1,6 +1,9 @@
-﻿using UnityEngine;
+﻿using System;
+using Random=UnityEngine.Random;
+using UnityEngine;
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
 using UnityEngine.InputSystem;
+using Cinemachine;
 #endif
 
 /* Note: animations are called via the controller for both the character and capsule using animator null checks
@@ -16,7 +19,7 @@ namespace StarterAssets
     {
         [Header("Player")]
         [Tooltip("Move speed of the character in m/s")]
-        public float MoveSpeed = 2.0f;
+        public float MoveSpeed = 5.335f;
 
         [Tooltip("Sprint speed of the character in m/s")]
         public float SprintSpeed = 5.335f;
@@ -98,6 +101,15 @@ namespace StarterAssets
         private int _animIDFreeFall;
         private int _animIDMotionSpeed;
 
+        public CinemachineVirtualCamera cinemachineVirtualCamera;
+        public float zoomMinDistance = 1.5f;
+        public float zoomMaxDistance = 6f;
+        public float zoomSpeed = 0.02f;
+        public float zoomFactor = 0.5f;
+        private float zoom = 4f;
+        private float cameraDistance = 4f;
+        private float zoomVelocity = 0f;
+
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
         private PlayerInput _playerInput;
 #endif
@@ -150,6 +162,8 @@ namespace StarterAssets
             // reset our timeouts on start
             _jumpTimeoutDelta = JumpTimeout;
             _fallTimeoutDelta = FallTimeout;
+
+            this.zoomVelocity = 0f; 
         }
 
         private void Update()
@@ -164,6 +178,7 @@ namespace StarterAssets
         private void LateUpdate()
         {
             CameraRotation();
+            CameraZoom();   
         }
 
         private void AssignAnimationIDs()
@@ -188,6 +203,14 @@ namespace StarterAssets
             {
                 _animator.SetBool(_animIDGrounded, Grounded);
             }
+        }
+
+        private void CameraZoom() {
+            this.zoom -= _input.zoom / 240f * this.zoomFactor;
+            this.zoom = Mathf.Clamp(this.zoom, this.zoomMinDistance, this.zoomMaxDistance);
+            this.cameraDistance = Mathf.SmoothDamp(this.cameraDistance, this.zoom, ref this.zoomVelocity, Time.unscaledTime * this.zoomSpeed);
+
+            this.cinemachineVirtualCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>().CameraDistance = this.cameraDistance;
         }
 
         private void CameraRotation()

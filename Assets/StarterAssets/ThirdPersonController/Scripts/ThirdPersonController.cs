@@ -110,6 +110,10 @@ namespace StarterAssets
         private float cameraDistance = 4f;
         private float zoomVelocity = 0f;
 
+        private bool thirdPersonCamera = true;
+        
+
+
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
         private PlayerInput _playerInput;
 #endif

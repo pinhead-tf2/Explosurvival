@@ -13,6 +13,7 @@ namespace StarterAssets
 		public bool jump;
 		public bool sprint;
 		public float zoom;
+		public bool viewpoint;
 
 		[Header("Movement Settings")]
 		public bool analogMovement;
@@ -45,6 +46,11 @@ namespace StarterAssets
 			SprintInput(value.isPressed);
 		}
 
+		public void OnViewpoint(InputValue value)
+		{
+			ViewpointInput(value.isPressed);
+		}
+
 		public void OnZoom(InputValue value) {
 			ZoomInput(value.Get<float>());
 		}
@@ -73,6 +79,10 @@ namespace StarterAssets
 
 		public void ZoomInput(float newZoomInput) {
 			zoom = newZoomInput;
+		}
+
+		public void ViewpointInput(bool newViewpointInput) {
+			viewpoint = newViewpointInput;
 		}
 
 		private void OnApplicationFocus(bool hasFocus)

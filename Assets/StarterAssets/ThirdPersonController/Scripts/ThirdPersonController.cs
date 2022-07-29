@@ -110,7 +110,7 @@ namespace StarterAssets
         private float cameraDistance = 4f;
         private float zoomVelocity = 0f;
 
-        private bool thirdPersonCamera = true;
+        // private bool thirdPersonCamera = true;
         
 
 

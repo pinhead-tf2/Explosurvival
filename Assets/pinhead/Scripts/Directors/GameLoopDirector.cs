@@ -22,14 +22,12 @@ public class GameLoopDirector : MonoBehaviour
     [Header("UI")]
     [SerializeField] TextMeshProUGUI timerText;
 
-    // Start is called before the first frame update
+    // Code
+
     void Start() {
-        gameState = validGameStates[1]; // Intermission
-        timeLeft = intermissionLength;
-        timerActive = true;
+        Intermission();
     }
 
-    // Update is called once per frame
     void Update() {
         if (timerActive) {
             if (timeLeft > 0) {
@@ -39,10 +37,20 @@ public class GameLoopDirector : MonoBehaviour
                 timerActive = false;
                 timeLeft = 0f;
                 if (gameState == validGameStates[1]) { // Intermission
-                    
+                    SetupPlayspace();
+                } else if (gameState == validGameStates[3]) { // Playing
+                    EndRound();
                 }
             }
         }
+    }
+
+    // Custom Voids
+
+    void Intermission() {
+        gameState = validGameStates[1]; // Intermission
+        timeLeft = intermissionLength;
+        timerActive = true;
     }
 
     void SetupPlayspace() { // Possibly make this a game setup director??
@@ -54,7 +62,15 @@ public class GameLoopDirector : MonoBehaviour
     }
 
     void GameLoop() {
+        gameState = validGameStates[3]; // Playing
         // Make bomb and item directors active
+        EndRound();
+    }
+
+    void EndRound() {
+        gameState = validGameStates[4]; // Cleanup
+
+        Intermission();
     }
 
 }

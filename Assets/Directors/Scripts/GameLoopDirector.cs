@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-namespace pinhead.Scripts.Directors
+namespace Directors
 {
     public class GameLoopDirector : MonoBehaviour
     { 

@@ -6478,7 +6478,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed097836afd8406c890986777bffc856, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bomb: {fileID: 0}
+  bomb: {fileID: 5959546671012980316, guid: de0342ae45e7a2444bdba0a788c77185, type: 3}
 --- !u!4 &2031747739 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7883444336704333193, guid: 8bb020d0e71460b48b0723f9b39962dd,
@@ -6627,6 +6627,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7883444336552351460, guid: 8bb020d0e71460b48b0723f9b39962dd,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 7883444336552351460, guid: 8bb020d0e71460b48b0723f9b39962dd,
         type: 3}
       propertyPath: m_TagString

@@ -15,5 +15,6 @@ namespace Bombs
         [Header("Stats")]
         [SerializeField] float m_Time;
         [SerializeField] float m_Damage;
+        [SerializeField] bool m_GravityAffected;
     }
 }

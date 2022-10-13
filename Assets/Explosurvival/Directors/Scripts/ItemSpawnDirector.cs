@@ -1,8 +1,6 @@
-﻿using System;
-using UnityEngine;
-using Random = UnityEngine.Random;
+﻿using UnityEngine;
 
-namespace Directors
+namespace Explosurvival.Directors
 {
     public class ItemSpawnDirector : MonoBehaviour
     {

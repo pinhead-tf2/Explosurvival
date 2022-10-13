@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Bombs
+namespace Explosurvival.Bombs
 {
     [CreateAssetMenu(fileName = "Bomb Object", menuName = "Bombs/Bomb Object", order = 0)]
     public class BombObject : ScriptableObject

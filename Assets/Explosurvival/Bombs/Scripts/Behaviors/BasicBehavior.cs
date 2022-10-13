@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Bombs.Behaviors
+namespace Explosurvival.Bombs.Behaviors
 {
     public class BasicBehavior : MonoBehaviour
     {

@@ -1,7 +1,6 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace Directors
+namespace Explosurvival.Directors
 {
     public class MapSpawnsDirector : MonoBehaviour
     {

@@ -11,7 +11,7 @@ namespace Explosurvival.Bombs
         [SerializeField] string m_Tooltip;
         [Header("Core")]
         [SerializeField] GameObject m_Model;
-        [SerializeField] float m_BehaviorScript;
+        [SerializeField] BombBehavior m_BehaviorScript;
         [Header("Stats")]
         [SerializeField] float m_Time;
         [SerializeField] float m_Damage;

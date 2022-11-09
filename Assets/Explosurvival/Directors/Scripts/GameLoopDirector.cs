@@ -21,12 +21,18 @@ namespace Explosurvival.Directors
         [FormerlySerializedAs("_updateUI")]
         [Space(5)]
 
-        [Header("UI")]
+        [Header("Scripts")]
         [SerializeField] private UpdateUI updateUI;
+        [SerializeField] private BombSpawnsDirector bombDirector;
+        [SerializeField] private ItemSpawnDirector itemDirector;
 
         // Code
 
-        private void Start() {
+        private void Start()
+        {
+            bombDirector = bombDirector.GetComponent<BombSpawnsDirector>();
+            itemDirector = itemDirector.GetComponent<ItemSpawnDirector>();
+            itemDirector.enabled = bombDirector.enabled = false;
             Intermission();
         }
 
@@ -58,20 +64,24 @@ namespace Explosurvival.Directors
 
         private void SetupPlayspace() { // Possibly make this a game setup director??
             gameState = _validGameStates[2]; // Setup
-            // do stuff
-
+            startTimeAmount = timeLeft = _roundLength;
+            updateUI.SwapUISet(true);
             // countdown
             GameLoop();
         }
 
         private void GameLoop() {
             gameState = _validGameStates[3]; // Playing
+            timerActive = true;
+            itemDirector.enabled = bombDirector.enabled = true;
             // Make bomb and item directors active
         }
 
         private void EndRound() {
             gameState = _validGameStates[4]; // Cleanup
-
+            updateUI.SwapUISet(false);
+            itemDirector.enabled = bombDirector.enabled = false;
+            bombDirector.CancelInvoke("BombSpawns");
             Intermission();
         }
 

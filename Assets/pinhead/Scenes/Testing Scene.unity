@@ -1203,7 +1203,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 695037295}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 29a60a5ce46a4b8c912b6006b3e10c8b, type: 3}
   m_Name: 
@@ -1651,8 +1651,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25d16ded9bac44bbabd64af6ce84524d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lobbyUISet: {fileID: 0}
-  gameUISet: {fileID: 0}
+  lobbyUISet: {fileID: 1649230937}
+  gameUISet: {fileID: 1517944353}
   clockArmLobby: {fileID: 1565969699}
   timerTextLobby: {fileID: 1900046709}
   clockArmGame: {fileID: 486326009}
@@ -3952,7 +3952,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1517944354
 Transform:
   m_ObjectHideFlags: 0
@@ -4321,7 +4321,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1649230938
 Transform:
   m_ObjectHideFlags: 0
@@ -4654,6 +4654,8 @@ MonoBehaviour:
   startTimeAmount: 0
   timerActive: 0
   updateUI: {fileID: 1054014864}
+  bombDirector: {fileID: 2004670465}
+  itemDirector: {fileID: 695037297}
 --- !u!1 &2004670463
 GameObject:
   m_ObjectHideFlags: 0
@@ -4693,7 +4695,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2004670463}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ed097836afd8406c890986777bffc856, type: 3}
   m_Name: 

@@ -19,11 +19,17 @@ namespace Explosurvival.UI
         [Header("Game")]
         [SerializeField] private Image clockArmGame;
         [SerializeField] private TextMeshProUGUI timerTextGame;
-        
+
+        private void Start()
+        {
+            lobbyUISet.SetActive(true);
+            gameUISet.SetActive(false);
+        }
+
         public void UpdateTimer(float timeLeft, float startAmount, string currentState) 
         {
             var tss = TimeSpan.FromSeconds(timeLeft);
-            var newText = $"{tss.Minutes:00}:{tss.Seconds:00}"; // woah, very cool thank you intellij
+            var newText = $"{tss.Minutes:0}:{tss.Seconds:00}"; // woah, very cool thank you intellij
             var newRot = new Vector3(0, 0, timeLeft / startAmount * 360);
             if (currentState == "Intermission")
             {
@@ -37,10 +43,11 @@ namespace Explosurvival.UI
             }
         }
 
-        public void SwapUISet()
+        public void SwapUISet(bool value) // true to use game, false to use lobby
         {
             // Put up transition to hide the swap
-            
+            lobbyUISet.SetActive(!value);
+            gameUISet.SetActive(value);
         }
     }
 }

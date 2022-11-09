@@ -1,13 +1,16 @@
-﻿using UnityEngine;
+﻿using Explosurvival.Bombs;
+using UnityEngine;
 using Random = UnityEngine.Random;
 
 namespace Explosurvival.Directors
 {
     public class BombSpawnsDirector : MonoBehaviour
     {
+        [SerializeField] private BombObject[] availableBombs;
         public GameObject bomb;
         [SerializeField] private GameObject spawnCorner1;
         [SerializeField] private GameObject spawnCorner2;
+        [SerializeField] private float corner1pos1, corner1pos2, corner2pos1, corner2pos2;
 
         private void Start()
         {
@@ -24,21 +27,23 @@ namespace Explosurvival.Directors
         {
             // Need to change instantiate based on bomb type
             var newBomb = Instantiate(bomb, new Vector3(
-                    Random.Range(-11.5f, 11.5f), 
-                    36.75f, 
-                    Random.Range(-11.5f, 11.5f)
+                    Random.Range(corner1pos1, corner2pos1),
+                    36.75f,
+                    Random.Range(corner1pos2, corner2pos2)
                 ), Quaternion.Euler(
                     new Vector3(
-                        Random.Range(-360f, 360f), 
-                        Random.Range(-360f, 360f), 
+                        Random.Range(-360f, 360f),
+                        Random.Range(-360f, 360f),
                         Random.Range(-360f, 360f)
                     )
                 )
             );
             var newBombRb = newBomb.GetComponent<Rigidbody>();
-            newBombRb.AddForce(Random.Range(-1, 1), -19.6f, Random.Range(-1, 1), ForceMode.VelocityChange);
-            newBombRb.AddTorque(Random.Range(-2, 2), Random.Range(-2, 2), Random.Range(-2, 2), ForceMode.VelocityChange);
-            Invoke("BombSpawns", Random.Range(8f, 12f));
+            newBombRb.AddForce(Random.Range(-1f, 1f), -19.6f, Random.Range(-1f, 1f), ForceMode.VelocityChange);
+            newBombRb.AddTorque(Random.Range(-3f, 3f), Random.Range(-3f, 3f), Random.Range(-3f, 3f), ForceMode.VelocityChange);
+            Invoke("BombSpawns", Random.Range(8f, 12f)); // To be replaced with calculation
+            // Factor in difficulty and available bombs
+            // Maybe RoR2-like?
         }
     }
 }

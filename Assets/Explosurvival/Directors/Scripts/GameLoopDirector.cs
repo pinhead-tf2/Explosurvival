@@ -1,6 +1,6 @@
+using System.Collections;
 using UnityEngine;
 using Explosurvival.UI;
-using UnityEngine.Serialization;
 
 namespace Explosurvival.Directors
 {
@@ -18,7 +18,6 @@ namespace Explosurvival.Directors
         [SerializeField] private bool timerActive;
         public bool TimerActive => timerActive;
         private readonly float _intermissionLength = 30f, _roundLength = 150f; // Length of the intermission, round (seconds)
-        [FormerlySerializedAs("_updateUI")]
         [Space(5)]
 
         [Header("Scripts")]
@@ -26,10 +25,27 @@ namespace Explosurvival.Directors
         [SerializeField] private BombSpawnsDirector bombDirector;
         [SerializeField] private ItemSpawnDirector itemDirector;
 
+        [Space(5)] [Header("Misc")] 
+        [ReadOnlyAttribute, SerializeField] private GameObject[] players;
+        [SerializeField] private GameObject spawnCorner1;
+        [SerializeField] private GameObject spawnCorner2; 
+        private float _corner1Pos1;
+        private float _corner1Pos2; 
+        private float _corner2Pos1; 
+        private float _corner2Pos2;
+
         // Code
 
         private void Start()
         {
+            var position1 = spawnCorner1.transform.position;
+            var position2 = spawnCorner2.transform.position;
+            _corner1Pos1 = position1.x;
+            _corner1Pos2 = position1.z;
+            _corner2Pos1 = position2.x;
+            _corner2Pos2 = position2.z;
+            players = GameObject.FindGameObjectsWithTag("Player");
+
             bombDirector = bombDirector.GetComponent<BombSpawnsDirector>();
             itemDirector = itemDirector.GetComponent<ItemSpawnDirector>();
             itemDirector.enabled = bombDirector.enabled = false;
@@ -64,10 +80,24 @@ namespace Explosurvival.Directors
 
         private void SetupPlayspace() { // Possibly make this a game setup director??
             gameState = _validGameStates[2]; // Setup
+            timerActive = false;
             startTimeAmount = timeLeft = _roundLength;
+            // load up playspace
+            foreach (var player in players)
+            {
+                var characterController = player.GetComponent<CharacterController>();
+                characterController.enabled = false;
+                player.transform.position = new Vector3(
+                    Random.Range(_corner1Pos1, _corner2Pos1),
+                    30.75f,
+                    Random.Range(_corner1Pos2, _corner2Pos2)
+                );
+                characterController.enabled = true;
+                print("teleported");
+            }
+            // put up transition ui
             updateUI.SwapUISet(true);
-            // countdown
-            GameLoop();
+            StartCoroutine(Countdown());
         }
 
         private void GameLoop() {
@@ -81,9 +111,17 @@ namespace Explosurvival.Directors
             gameState = _validGameStates[4]; // Cleanup
             updateUI.SwapUISet(false);
             itemDirector.enabled = bombDirector.enabled = false;
+            // ReSharper disable once Unity.PerformanceCriticalCodeInvocation | Disabled because required CancelInvoke
             bombDirector.CancelInvoke("BombSpawns");
             Intermission();
         }
 
+        private IEnumerator Countdown()
+        {
+            // call countdown ui
+            yield return new WaitForSeconds(3);
+            timerActive = true;
+            GameLoop();
+        }
     }
 }

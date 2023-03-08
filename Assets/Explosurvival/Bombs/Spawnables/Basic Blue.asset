@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17deba47cb0f436dbef60b8bd689cc77, type: 3}
+  m_Name: Basic Blue
+  m_EditorClassIdentifier: 
+  m_Name: Basic Blue
+  m_Type: 1
+  m_Tooltip: Your standard blue bomb.
+  m_GameObj: {fileID: 4562801007197442292, guid: 5e71c691b0e4f7b4c91501368e5cd792,
+    type: 3}
+  m_TickSound: {fileID: 8300000, guid: 1629828b1001b80458fc885aff37edb7, type: 3}
+  m_ExplosionSound: {fileID: 8300000, guid: 68a0adb0af02f1b4c94465717b4fbb26, type: 3}
+  m_ExplosionEffect: {fileID: 5287301006688919015, guid: 8e036d9220b4a0f449eecb1ef4e4089a,
+    type: 3}
+  m_Damage: 25
+  m_Radius: 4
+  m_FuseTime: 14
+  m_DestroyTerrain: 0

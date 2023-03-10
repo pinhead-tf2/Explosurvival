@@ -22,6 +22,6 @@ MonoBehaviour:
   m_ExplosionEffect: {fileID: 5287301006688919015, guid: 8e036d9220b4a0f449eecb1ef4e4089a,
     type: 3}
   m_Damage: 25
-  m_Radius: 4
+  m_Radius: 2
   m_FuseTime: 14
-  m_DestroyTerrain: 0
+  m_DestroyTerrain: 1

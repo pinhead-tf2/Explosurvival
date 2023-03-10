@@ -69,16 +69,16 @@ namespace Explosurvival.Bombs.Behaviors
             explosion.transform.localScale = new Vector3(Radius, Radius, Radius);
             AudioSource.PlayOneShot(ExplosionSound);
             _meshRenderer.enabled = _meshCollider.enabled = false;
-            Collider[] hitPlayers = new Collider[16];
-            int playerHits = Physics.OverlapSphereNonAlloc(bTPosition, Radius, hitPlayers, 1<< 3); // Players
-            Collider[] hitTerrain = new Collider[25];
-            int terrainHits = Physics.OverlapSphereNonAlloc(bTPosition, Radius, hitPlayers, 1<< 8); // Terrain
-            Collider[] hitBombs = new Collider[10];
-            int bombHits = Physics.OverlapSphereNonAlloc(bTPosition, Radius, hitPlayers, 1<< 6); // Bombs
             
-            // do all the hits and stuff here
-            
-            
+            if (CanDestroyTerrain)
+            {
+                explosion.SendMessage("Explode", Radius);
+            }
+            else
+            {
+                explosion.SendMessage("ExplodePlayerOnly", Radius);
+            }
+
             Destroy(gameObject); // Removes the bomb for memory's sake, the explosion removes itself
         }
     }
